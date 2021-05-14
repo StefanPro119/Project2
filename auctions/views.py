@@ -1,14 +1,31 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
+from . import forms
 
-from .models import User
+from .models import User, Auction, Bid, Comment
+
+# class CreateForm(forms.Form):
+#     title = forms.CharField(label='Create title ')
 
 
 def index(request):
     return render(request, "auctions/index.html")
+
+
+def create(request):
+    if request.method == 'POST':
+        form = forms.CreateAuction(request.POST, request.FILES)
+        if form.is_valid():
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = forms.CreateAuction()
+    return render(request, "auctions/create.html", {
+        'form': form,
+    })
+
 
 
 def login_view(request):
@@ -61,3 +78,5 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+

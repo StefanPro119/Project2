@@ -19,7 +19,7 @@ class Auction(models.Model):
         return f"{self.seller} is selling {self.title}"
 
 
-#klaza za licitiranje proizvoda
+#klasa za licitiranje proizvoda
 class Bid(models.Model):
     buyer = models.CharField(max_length=64)
     bid_value = models.IntegerField()
