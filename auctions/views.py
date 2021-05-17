@@ -19,12 +19,16 @@ def create(request):
     if request.method == 'POST':
         form = forms.CreateAuction(request.POST, request.FILES)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.seller = request.user
+            instance.save()
             return HttpResponseRedirect(reverse("index"))
     else:
         form = forms.CreateAuction()
     return render(request, "auctions/create.html", {
         'form': form,
     })
+
 
 
 

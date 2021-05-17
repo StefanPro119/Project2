@@ -5,6 +5,12 @@ from django.db import models
 class User(AbstractUser):
     pass
 
+# class Category(models.Model):
+#     name = models.CharField(max_length=60)
+#
+#     def __str__(self):
+#         return f"{self.name}"
+
 #klasa za prodavanje proizvoda
 class Auction(models.Model):
     seller = models.CharField(max_length=64)
