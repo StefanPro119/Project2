@@ -5,21 +5,21 @@ from django.db import models
 class User(AbstractUser):
     pass
 
-# class Category(models.Model):
-#     name = models.CharField(max_length=60)
-#
-#     def __str__(self):
-#         return f"{self.name}"
+class Category(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return f"{self.name}"
 
 #klasa za prodavanje proizvoda
 class Auction(models.Model):
-    seller = models.CharField(max_length=64)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bidder')
     title = models.CharField(max_length=60)
     subtitle = models.CharField(max_length=120)
     start_bit = models.IntegerField()
     image = models.ImageField()
     data = models.DateTimeField(auto_now=True)
-    # select_category =
+    select_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', default=None)
 
     def __str__(self):
         return f"{self.seller} is selling {self.title}"
