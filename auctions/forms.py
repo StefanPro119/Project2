@@ -3,7 +3,6 @@ from . import models
 from django import forms
 from .models import Category
 
-print('s')
 
 choices = Category.objects.all().values_list('name','name')
 

@@ -1,7 +1,16 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 
 {% block body %}
     <h2>Active Listings</h2>
+{% for list in lists %}
+    {{list.seller}} is selling {{ list.title }}
+    {% if list.image %}
+        <img src="{{ list.image.url }}">
+    {% else %}
+        <img src="{% static 'auctions/images/default.png' %}">
+    {% endif %}
 
-    TODO
+{% endfor %}
+
 {% endblock %}

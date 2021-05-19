@@ -10,10 +10,11 @@ from .models import User, Auction, Bid, Comment
 # class CreateForm(forms.Form):
 #     title = forms.CharField(label='Create title ')
 
-
 def index(request):
-    return render(request, "auctions/index.html")
-
+    lists = Auction.objects.all()
+    return render(request, "auctions/index.html", {
+        'lists':lists
+    })
 
 def create(request):
     if request.method == 'POST':
