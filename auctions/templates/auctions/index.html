@@ -2,15 +2,30 @@
 {% load static %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-{% for list in lists %}
-    {{list.seller}} is selling {{ list.title }}
-    {% if list.image %}
-        <img src="{{ list.image.url }}">
-    {% else %}
-        <img src="{% static 'auctions/images/default.png' %}">
-    {% endif %}
+    <h2 style="margin-left: 10px;">Active Listings</h2>
 
-{% endfor %}
+
+<div style="display: grid; grid-template-columns: 25% 25% 25% 25%; padding-left: 20px; ">
+    {% for list in lists %}
+        <div style="padding-left: 20px; width: 18.8rem; padding-bottom: 20px">
+            <div class="card-title text-dark bg-info mb-3">
+                  <div class="card-header">
+                    <h5 class="card-title">{{ list.title }}</h5>
+                  </div>
+            </div>
+            <div class="card" style="width: 17.5rem; height: 17.5rem">
+                {% if list.image %}
+                    <img src="{{ list.image.url }}" class="rounded" style="width: 17.5rem; height: 17.5rem">
+                {% else %}
+                    <img src="{% static 'auctions/images/default.png' %}" class="rounded" style="width: 17.5rem; height: 17.5rem">
+                {% endif %}
+            </div>
+            <h6>Starting bid:</h6><h2> €{{ list.start_bit }}
+            <div class="btn btn-outline-primary"  style="float: right;"><h6><a href="{% url 'item' list.id %}">{{ item }}More info</a></h6></div> </h2>
+        </div>
+        {% endfor %}
+ </div>
+
+
 
 {% endblock %}

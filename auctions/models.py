@@ -16,23 +16,15 @@ class Category(models.Model):
 class Auction(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bidder')
     title = models.CharField(max_length=60)
-    subtitle = models.CharField(max_length=120)
+    subtitle = models.CharField(max_length=1200)
     start_bit = models.IntegerField()
-    image = ResizedImageField(size=[500, 500],quality=100, null=True, blank=True, upload_to="images/")
+    image = ResizedImageField(size=[500, 500], quality=100, null=True, blank=True, upload_to="images/")
     data = models.DateTimeField(auto_now=True)
     select_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', default=None)
 
     def __str__(self):
         return f"{self.seller} is selling {self.title}"
 
-    # def save_picture(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     img = Image.open(self.image.path)
-    #
-    #     if img.height > 300 or img.weight > 300:
-    #         output_size = (300,300)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
 
 #klasa za licitiranje proizvoda
 class Bid(models.Model):

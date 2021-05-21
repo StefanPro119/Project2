@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block body %}
+<div style="display: flex; justify-content: center; ">
+    <h1>
+        <div class="card-title text-dark bg-info mb-3"
+         style="max-width: 50rem; text-align: left;">Actual price: {{ item.start_bit }}€
+        </div>
+    </h1>
+</div>
+
+
+<section style="display: flex;">
+  <div style="flex: 1; padding: 1rem;">
+    <article>
+        <div class="card" style="width: 50rem;">
+              {% if item.image %}
+                <img src="{{ item.image.url }}">
+            {% else %}
+                <img src="{% static 'auctions/images/default.png' %}">
+            {% endif %}
+          </div>
+        </div>
+    </article>
+  </div>
+  <div style="flex: 1; padding: 1rem;">
+    <article>
+        <div class="card text-dark bg-light mb-3" style="max-width: 30rem; text-align: center; ">
+          <div class="card-header">
+            <h5 class="card-title">{{ item.title }}</h5>
+              <h6 class="card-title">Category: {{ item.select_category }}</h6>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ item.subtitle }}</p>
+          </div>
+        </div>
+<div style="position: relative;">
+    <div style="position: absolute;  max-width: 30rem; ">
+        <div style="float: right;" class="d-inline p-2 bg-primary text-white " >Date: {{ item.data }}
+        </div>
+    </div>
+    <div style="z-index: 9; max-width: 30rem; ">
+        <div style="float: right;" class="d-inline p-2 bg-dark text-white"  >User: {{ item.seller }}
+        </div>
+    </div>
+</div>
+    </article>
+  </div>
+</section>
+
+
+
+{% endblock %}

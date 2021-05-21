@@ -30,8 +30,11 @@ def create(request):
         'form': form,
     })
 
-
-
+def auction_item(requset, item_id):
+    item = Auction.objects.get(id=item_id)
+    return render(requset, 'auctions/item.html', {
+        'item': item,
+    })
 
 def login_view(request):
     if request.method == "POST":
