@@ -12,10 +12,18 @@ from .models import User, Auction, Bid, Comment, Watchlist
 # class CreateForm(forms.Form):
 #     title = forms.CharField(label='Create title ')
 
+
 def index(request):
+    user_id = request.user
     lists = Auction.objects.all()
+    if user_id.is_authenticated:
+        count = Watchlist.objects.filter(user_id=user_id).count()
+        return render(request, "auctions/index.html", {
+            'lists': lists,
+            'count': count
+        })
     return render(request, "auctions/index.html", {
-        'lists':lists
+        'lists': lists,
     })
 
 def create(request):
@@ -32,16 +40,23 @@ def create(request):
         'form': form,
     })
 
-def auction_item(requset, item_id):
+def auction_item(request, item_id):
+    user_id = request.user
     item = Auction.objects.get(id=item_id)
-    return render(requset, 'auctions/item.html', {
+    count = Watchlist.objects.filter(user_id=user_id).count()
+    return render(request, 'auctions/item.html', {
         'item': item,
+        'count': count
     })
 
 @login_required
 def watchlist(request):
+    user_id = request.user
+    user_watchlist = Watchlist.objects.filter(user_id=user_id)
+    count = Watchlist.objects.filter(user_id=user_id).count()
     return render(request, "auctions/watchlist.html", {
-        'lists': Watchlist.objects.all(),
+        'lists': user_watchlist,
+        'count': count
     })
 
 @login_required

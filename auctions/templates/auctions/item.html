@@ -49,13 +49,13 @@
                 </div>
             </div>
         </div>
-
+        {% if user.is_authenticated %}
         <div style="padding-top: 50px;">
             <div style="padding-top: 20px;" >
                 <a href="{% url 'add_to_watchlist' item.id  %}" type="button" class="btn btn-info">Add/remove to Watchlist</a>
             </div>
         </div>
-
+        {% endif %}
 
     </article>
 
