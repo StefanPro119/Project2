@@ -1,7 +1,13 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
 {% block body %}
-<div style="display: flex; justify-content: center; ">
+
+
+<h2 style="margin-left: 10px;">Active Listings</h2>
+
+
+
+<div style="display: flex; justify-content: center;">
     <h1>
         <div class="card-title text-dark bg-info mb-3"
          style="max-width: 50rem; text-align: left;">Actual price: {{ item.start_bit }}€
@@ -13,19 +19,18 @@
 <section style="display: flex;">
   <div style="flex: 1; padding: 1rem;">
     <article>
-        <div class="card" style="width: 50rem;">
+        <div class="card" style="width: 45rem;">
               {% if item.image %}
-                <img src="{{ item.image.url }}">
+                <img src="{{ item.image.url }}" class="rounded" style="width: 47rem; height: 35rem; padding-right: 40px">
             {% else %}
-                <img src="{% static 'auctions/images/default.png' %}">
+                <img src="{% static 'auctions/images/default.png' %}" style="width: 47rem; height: 35rem">
             {% endif %}
-          </div>
         </div>
     </article>
   </div>
   <div style="flex: 1; padding: 1rem;">
-    <article>
-        <div class="card text-dark bg-light mb-3" style="max-width: 30rem; text-align: center; ">
+    <article style="padding-left:80px">
+        <div class="card text-dark bg-light mb-3" style="max-width: 30rem; text-align: center;">
           <div class="card-header">
             <h5 class="card-title">{{ item.title }}</h5>
               <h6 class="card-title">Category: {{ item.select_category }}</h6>
@@ -34,20 +39,30 @@
             <p class="card-text">{{ item.subtitle }}</p>
           </div>
         </div>
-<div style="position: relative;">
-    <div style="position: absolute;  max-width: 30rem; ">
-        <div style="float: right;" class="d-inline p-2 bg-primary text-white " >Date: {{ item.data }}
+        <div style="position: relative; max-width: 30rem">
+            <div >
+                <div style="float: left;" class="d-inline p-2 bg-primary text-white">Date: {{ item.data }}
+                </div>
+            </div>
+            <div >
+                <div style="float: right;" class="d-inline p-2 bg-dark text-white">User: {{ item.seller }}
+                </div>
+            </div>
         </div>
-    </div>
-    <div style="z-index: 9; max-width: 30rem; ">
-        <div style="float: right;" class="d-inline p-2 bg-dark text-white"  >User: {{ item.seller }}
-        </div>
-    </div>
-</div>
-    </article>
-  </div>
-</section>
 
+        <div style="padding-top: 50px;">
+            <div style="padding-top: 20px;" >
+                <a href="{% url 'add_to_watchlist' item.id  %}" type="button" class="btn btn-info">Add/remove to Watchlist</a>
+            </div>
+        </div>
+
+
+    </article>
+
+
+  </div>
+
+</section>
 
 
 {% endblock %}

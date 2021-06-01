@@ -1,34 +1,34 @@
 {% extends "auctions/layout.html" %}
 {% load static %}
-
 {% block body %}
+    <h1>My Watchlist</h1>
 
+{% if messages%}
+    {% for messege in messages %}
+    <div class="alert alert-danger" role="alert">
+       {{ messege }}
+    </div>
+    {% endfor %}
+{% endif %}
 
-
-{{ e }}
-{{ x }}
-{{ ee }}
 <div style="display: grid; grid-template-columns: 25% 25% 25% 25%; padding-left: 20px; ">
     {% for list in lists %}
         <div style="padding-left: 20px; width: 18.8rem; padding-bottom: 80px">
             <div class="card-title text-dark bg-info mb-3">
                   <div class="card-header">
-                    <h5 class="card-title">{{ list.title }}</h5>
+                    <h5 class="card-title">{{ list.auction_id.title }}</h5>
                   </div>
             </div>
             <div class="card">
-                {% if list.image %}
-                    <img src="{{ list.image.url }}" class="rounded" style="width: 17.4rem; height: 15rem">
+                {% if list.auction_id.image %}
+                    <img src="{{ list.auction_id.image.url }}" class="rounded" style="width: 17.4rem; height: 15rem">
                 {% else %}
                     <img src="{% static 'auctions/images/default.png' %}" class="rounded" style="width: 17.5rem; height: 15rem">
                 {% endif %}
             </div>
-            <h6>Starting bid:</h6><h2> €{{ list.start_bit }}
-            <div class="btn btn-outline-primary"  style="float: right;"><h6><a href="{% url 'item' list.id %}">{{ item }}More info</a></h6></div> </h2>
+            <h6>Starting bid:</h6><h2> €{{ list.auction_id.start_bit }}
+            <div class="btn btn-outline-primary"  style="float: right;"><h6><a href="{% url 'item' list.auction_id.id %}">{{ item }}More info</a></h6></div> </h2>
         </div>
         {% endfor %}
  </div>
-
-
-
 {% endblock %}

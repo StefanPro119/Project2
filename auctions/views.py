@@ -1,11 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from . import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-from .models import User, Auction, Bid, Comment
+from .models import User, Auction, Bid, Comment, Watchlist
 
 # class CreateForm(forms.Form):
 #     title = forms.CharField(label='Create title ')
@@ -35,6 +37,30 @@ def auction_item(requset, item_id):
     return render(requset, 'auctions/item.html', {
         'item': item,
     })
+
+@login_required
+def watchlist(request):
+    return render(request, "auctions/watchlist.html", {
+        'lists': Watchlist.objects.all(),
+    })
+
+@login_required
+def add_to_watchlist(request, item_id):
+    user_id = request.user
+    item = Auction.objects.get(id=item_id)
+    watch_list = Watchlist.objects.filter(user_id=user_id, auction_id=item)
+    if watch_list:
+        watch_list.delete()
+        messages.info(request, 'You have been deleted this product from Watchlist')
+        return HttpResponseRedirect(reverse('watchlist'))
+    else:
+        add = Watchlist(user_id=user_id, auction_id=item)
+        add.save()
+        messages.info(request, 'You have been added this product to Watchlist')
+        return HttpResponseRedirect(reverse('watchlist'))
+
+
+
 
 def login_view(request):
     if request.method == "POST":
