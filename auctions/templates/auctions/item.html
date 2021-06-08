@@ -4,7 +4,17 @@
 
 
 <h2 style="margin-left: 10px;">Active Listings</h2>
-
+{{ instance }}
+{{ user }}
+<h1>{{ start_bid }}</h1>
+{{ bid_value }}
+{% if messages%}
+    {% for messege in messages %}
+    <div class="alert alert-danger" role="alert">
+       {{ messege }}
+    </div>
+    {% endfor %}
+{% endif %}
 
 
 <div style="display: flex; justify-content: center;">
@@ -19,11 +29,11 @@
 <section style="display: flex;">
   <div style="flex: 1; padding: 1rem;">
     <article>
-        <div class="card" style="width: 45rem;">
+        <div class="card" style="width: 37rem;">
               {% if item.image %}
-                <img src="{{ item.image.url }}" class="rounded" style="width: 47rem; height: 35rem; padding-right: 40px">
+                <img src="{{ item.image.url }}" class="rounded" style="width: 40rem; height: 30rem; padding-right: 40px">
             {% else %}
-                <img src="{% static 'auctions/images/default.png' %}" style="width: 47rem; height: 35rem">
+                <img src="{% static 'auctions/images/default.png' %}" style="width: 40rem; height: 30rem">
             {% endif %}
         </div>
     </article>
@@ -56,7 +66,18 @@
             </div>
         </div>
         {% endif %}
-
+<div style="padding-top: 50px; ">
+    <form action="{% url 'make_bid' item.id%}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Make a bid">
+    </form>
+</div>
+        <div>
+            <h1>You bid  {{ bid_value }}€</h1>
+        </div>
+        {{ bid_number }}
+        {{ bid }}
     </article>
 
 

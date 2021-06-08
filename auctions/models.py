@@ -28,8 +28,8 @@ class Auction(models.Model):
 
 #klasa za licitiranje proizvoda
 class Bid(models.Model):
-    buyer = models.CharField(max_length=64)
-    bid_value = models.IntegerField()
+    buyer = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='customer')
+    bid_value = models.IntegerField(null=True)
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

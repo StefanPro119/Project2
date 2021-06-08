@@ -22,3 +22,9 @@ class CreateAuction(forms.ModelForm):
             'start_bit': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'For your product start bid will be...'}),
             'select_category': forms.Select(choices=choice_list, attrs={'class':'form-control'}),
         }
+
+
+class MakeBid(forms.ModelForm):
+    class Meta:
+        model = models.Bid
+        fields = ['bid_value']
