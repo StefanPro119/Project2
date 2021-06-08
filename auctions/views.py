@@ -44,8 +44,10 @@ def auction_item(request, item_id):
     item = Auction.objects.get(id=item_id)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
-    bid = Bid.objects.filter(buyer=user_id, id=item_id).first()
-    # bid_number = bid.bid_value
+    try:
+        bid = Bid.objects.filter(buyer=user_id, id=item_id).first().bid_value
+    except:
+        bid = 0
 
     count = Watchlist.objects.filter(user_id=user_id).count()
     return render(request, 'auctions/item.html', {
@@ -83,61 +85,25 @@ def add_to_watchlist(request, item_id):
         return HttpResponseRedirect(reverse('watchlist'))
 
 
-# @login_required
-# def make_bid(request, item_id):
-#     user_id = request.user
-#     item = Auction.objects.get(id=item_id)
-#     start_bid = Auction.objects.filter(id=item_id).first()
-#     if request.method == 'POST':
-#         form = MakeBid(request.POST)
-#         if form.is_valid():
-#             bid_value = form.cleaned_data['bid_value']
-#             if bid_value > start_bid.start_bit:
-#                 instance = form.save(commit=False)
-#                 instance.buyer = user_id
-#                 instance.id = item_id
-#                 instance.save()
-#
-#                 return render(request, "auctions/item.html", {
-#                     "bid_value": bid_value,
-#                     'start_bid': start_bid.start_bit,
-#                     'item': item,
-#                     'instance': instance,
-#                     'form': form,
-#             })
-#             else:
-#                 messages.error(request, "Your bid is invalid or smaller than actual prise/bid")
-#                 return HttpResponseRedirect(reverse('item', args=(item.id,)))
-#
-#     return render(request, "auctions/item.html", {
-#         'form': form
-#             })
-
-
-
 @login_required
 def make_bid(request, item_id):
     user_id = request.user
     item = Auction.objects.get(id=item_id)
     start_bid = Auction.objects.filter(id=item_id).first()
-
+    try:
+        bid = Bid.objects.filter(buyer=user_id, id=item_id).first().bid_value
+    except:
+        bid = 0
     if request.method == 'POST':
         form = MakeBid(request.POST)
         if form.is_valid():
             bid_value = form.cleaned_data['bid_value']
-            if bid_value > start_bid.start_bit:
+            if bid_value > start_bid.start_bit | bid:
                 instance = form.save(commit=False)
                 instance.buyer = user_id
                 instance.id = item_id
                 instance.save()
-
-                return render(request, "auctions/item.html", {
-                    "bid_value": bid_value,
-                    'start_bid': start_bid.start_bit,
-                    'item': item,
-                    'instance': instance,
-                    'form': form,
-            })
+                return HttpResponseRedirect(reverse('item', args=(item.id,)))
             else:
                 messages.error(request, "Your bid is invalid or smaller than actual prise/bid")
                 return HttpResponseRedirect(reverse('item', args=(item.id,)))
