@@ -44,22 +44,25 @@ def auction_item(request, item_id):
     item = Auction.objects.get(id=item_id)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
-    itemm = item.status
+    try:
+        buyer = Bid.objects.filter(id=item_id).first().buyer
+    except:
+        buyer = None
+
     try:
         bid = Bid.objects.filter(id=item_id).first().bid_value
     except:
         bid = 0
 
     count = Watchlist.objects.filter(user_id=user_id).count()
-    # for i in add:
-    #     i
+
     return render(request, 'auctions/item.html', {
         'item': item,
         'count': count,
         'form': form,
         'bid_number': bid,
         'start_bid': start_bid,
-        'add': itemm
+        'buyer': buyer
     })
 
 @login_required
@@ -122,6 +125,7 @@ def close_bid(request, item_id):
     item.status = 'sold'
     item.save()
     return HttpResponseRedirect(reverse('index'))
+
 
 def login_view(request):
     if request.method == "POST":
