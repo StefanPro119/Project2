@@ -14,6 +14,7 @@ urlpatterns = [
     path("watchlist/", views.watchlist, name='watchlist'),
     path("watchlist/<int:item_id>/", views.add_to_watchlist, name='add_to_watchlist'),
     path("make_bid/<int:item_id>/", views.make_bid, name='make_bid'),
+    path("close_bid/<int:item_id>/", views.close_bid, name='close_bid'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

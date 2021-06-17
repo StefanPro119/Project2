@@ -13,7 +13,7 @@ from .models import User, Auction, Bid, Comment, Watchlist
 
 def index(request):
     user_id = request.user
-    lists = Auction.objects.all()
+    lists = Auction.objects.filter(status="active")
     # if statment because of error 'AnonymousUser' showing
     if user_id.is_authenticated:
         count = Watchlist.objects.filter(user_id=user_id).count()
@@ -44,18 +44,22 @@ def auction_item(request, item_id):
     item = Auction.objects.get(id=item_id)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
+    itemm = item.status
     try:
-        bid = Bid.objects.filter(buyer=user_id, id=item_id).first().bid_value
+        bid = Bid.objects.filter(id=item_id).first().bid_value
     except:
         bid = 0
 
     count = Watchlist.objects.filter(user_id=user_id).count()
+    # for i in add:
+    #     i
     return render(request, 'auctions/item.html', {
         'item': item,
         'count': count,
         'form': form,
         'bid_number': bid,
-        'start_bid': start_bid
+        'start_bid': start_bid,
+        'add': itemm
     })
 
 @login_required
@@ -91,7 +95,7 @@ def make_bid(request, item_id):
     item = Auction.objects.get(id=item_id)
     start_bid = Auction.objects.filter(id=item_id).first()
     try:
-        bid = Bid.objects.filter(buyer=user_id, id=item_id).first().bid_value
+        bid = Bid.objects.filter(id=item_id).first().bid_value
     except:
         bid = 0
     if request.method == 'POST':
@@ -111,6 +115,13 @@ def make_bid(request, item_id):
     return render(request, "auctions/item.html", {
         'form': form
             })
+
+@login_required
+def close_bid(request, item_id):
+    item = Auction.objects.get(id=item_id)
+    item.status = 'sold'
+    item.save()
+    return HttpResponseRedirect(reverse('index'))
 
 def login_view(request):
     if request.method == "POST":

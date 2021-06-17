@@ -4,9 +4,12 @@
 
 
 <h2 style="margin-left: 10px;">Active Listings</h2>
-{{ instance }}
-{{ user }}
-<h1>{{ start_bid }}</h1>
+<h1>{{ add }}</h1>
+<h2>{{ item }}</h2>
+{{ bid_number }}
+<h1>{{ s }}</h1>
+<h1>{{ request.user.id }}</h1>
+<h1>{{ item.seller.id }}</h1>
 {{ bid_value }}
 {% if messages%}
     {% for messege in messages %}
@@ -55,7 +58,7 @@
                 </div>
             </div>
             <div >
-                <div style="float: right;" class="d-inline p-2 bg-dark text-white">User: {{ item.seller }}
+                <div style="float: right;" class="d-inline p-2 bg-dark text-white">Created by: {{ item.seller }}
                 </div>
             </div>
         </div>
@@ -66,17 +69,27 @@
             </div>
         </div>
         {% endif %}
-<div style="padding-top: 50px; ">
-    <form action="{% url 'make_bid' item.id%}" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Make a bid">
-    </form>
-</div>
-        <div class="p-3 mb-2 bg-success text-white" style="float: left; width: 55%;">
-            <h4>You current bid is {{ bid_number }}€</h4>
-        </div>
-        {{ bid }}
+{% if user.is_authenticated and item.seller.id != request.user.id %}
+    <div style="padding-top: 50px; ">
+        <form action="{% url 'make_bid' item.id%}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Make a bid">
+        </form>
+    </div>
+{% endif %}
+            <div class="p-3 mb-2 bg-success text-white" style="float: left; width: 55%;">
+                <h4>Current bid is {{ bid_number }}€</h4>
+            </div>
+
+<!--        if the user is sign in and if the user who creates item can see this button-->
+        {% if user.is_authenticated and item.seller.id == request.user.id %}
+            <div style="padding-top: 50px;">
+                <div style="padding-top: 20px;" >
+                    <a href="{% url 'close_bid' item.id %}" type="button" class="btn btn-info">Close bid</a>
+                </div>
+            </div>
+        {% endif %}
     </article>
 
 

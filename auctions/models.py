@@ -2,6 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django_resized import ResizedImageField
 
+STATUS = [
+    ('active','active'),
+    ('sold','sold'),
+]
 
 class User(AbstractUser):
     pass
@@ -21,6 +25,7 @@ class Auction(models.Model):
     image = ResizedImageField(size=[500, 500], quality=100, null=True, blank=True, upload_to="images/")
     data = models.DateTimeField(auto_now=True)
     select_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', default=None)
+    status = models.CharField(max_length=7, choices=STATUS, default='active')
 
     def __str__(self):
         return f"{self.seller} is selling {self.title}"
