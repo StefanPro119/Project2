@@ -28,3 +28,18 @@ class MakeBid(forms.ModelForm):
     class Meta:
         model = models.Bid
         fields = ['bid_value']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ['commments']
+
+        #it will hide label 'commments'
+        labels = {
+            'commments': '',
+        }
+
+        widgets = {
+            'commments': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Text', 'style': 'height: 150px;width:500px'}),
+        }

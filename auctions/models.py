@@ -43,6 +43,8 @@ class Bid(models.Model):
 #klasa za komentarisanje proizvoda
 class Comment(models.Model):
     commments = models.TextField()
+    comment_user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='user_comment')
+    commment_auctions = models.ForeignKey(Auction, blank=True, null=True, on_delete=models.CASCADE, related_name='auctions_comment')
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

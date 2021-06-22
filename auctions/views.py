@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from . import forms
-from .forms import MakeBid
+from .forms import MakeBid, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -42,8 +42,10 @@ def create(request):
 def auction_item(request, item_id):
     user_id = request.user
     item = Auction.objects.get(id=item_id)
+    comments = Comment.objects.filter(commment_auctions=item)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
+    comment_form = forms.CommentForm()
     try:
         buyer = Bid.objects.filter(id=item_id).first().buyer
     except:
@@ -62,7 +64,9 @@ def auction_item(request, item_id):
         'form': form,
         'bid_number': bid,
         'start_bid': start_bid,
-        'buyer': buyer
+        'buyer': buyer,
+        'comment_form': comment_form,
+        'comments': comments
     })
 
 @login_required
@@ -126,6 +130,31 @@ def close_bid(request, item_id):
     item.save()
     return HttpResponseRedirect(reverse('index'))
 
+@login_required
+def add_comment(request, item_id):
+    user_id = request.user
+    item = Auction.objects.get(id=item_id)
+    if request.method == 'POST':
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.comment_user = user_id
+            instance.commment_auctions = item
+            instance.save()
+            return HttpResponseRedirect(reverse('item', args=(item.id,)))
+        else:
+            return render(request, "auctions/item.html", {
+                'form': form,
+            })
+
+
+    return render(request, "auctions/item.html", {
+        'formm': CommentForm(),
+        'formmm': Comment(),
+        'item': item,
+        'comments': comments,
+        })
+
 
 def login_view(request):
     if request.method == "POST":
@@ -177,5 +206,3 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
-
-

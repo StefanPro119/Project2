@@ -14,6 +14,9 @@
 {% endif %}
 
 
+
+
+
 <div style="display: flex; justify-content: center;">
     <h1>
         <div class="card-title text-dark bg-info mb-3"
@@ -59,13 +62,13 @@
         {% if user.is_authenticated %}
         <div style="padding-top: 50px;">
             <div style="padding-top: 20px;" >
-                <a href="{% url 'add_to_watchlist' item.id  %}" type="button" class="btn btn-info">Add/remove to Watchlist</a>
+                <a href="{% url 'add_to_watchlist' item.id %}" type="button" class="btn btn-info">Add/remove to Watchlist</a>
             </div>
         </div>
         {% endif %}
 {% if user.is_authenticated and item.seller.id != request.user.id and item.status == 'active' %}
     <div style="padding-top: 50px; ">
-        <form action="{% url 'make_bid' item.id%}" method="POST">
+        <form action="{% url 'make_bid' item.id %}" method="POST">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Make a bid">
@@ -97,6 +100,22 @@
   </div>
 
 </section>
-
+{% if user.is_authenticated %}
+        <form action="{% url 'add_comment' item.id  %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" value="Comment">
+        </form>
+{% endif %}
+<div class="border border-primary" style="max-width: 60rem; ">
+    <!--prvo sa "item." smo definisali u "function(def) auction_item" da je item u stvari broj id-a tog proizvoda a zatim sa auction_comment gde smo u models definisali "related_name=auctions_comment" koji je sa ForeignKey povezan sa Auction-->
+    {% for comment in item.auctions_comment.all %}
+        <div>
+            <h6>Comment: {{ comment }}</h6>
+            <strong><h7>User: {{ comment.comment_user }}</h7></strong>
+        </div>
+    <br>
+    {% endfor %}
+</div>
 
 {% endblock %}
