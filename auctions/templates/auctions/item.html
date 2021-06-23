@@ -111,8 +111,8 @@
     <!--prvo sa "item." smo definisali u "function(def) auction_item" da je item u stvari broj id-a tog proizvoda a zatim sa auction_comment gde smo u models definisali "related_name=auctions_comment" koji je sa ForeignKey povezan sa Auction-->
     {% for comment in item.auctions_comment.all %}
         <div>
-            <h6>Comment: {{ comment }}</h6>
-            <strong><h7>User: {{ comment.comment_user }}</h7></strong>
+            <h6>Comment: {{ comment }} </h6>
+            <strong><h7>User: {{ comment.comment_user }} </h7>{% if comment.comment_user.id == item.seller.id %} <h7 class="p-1 mb-1 bg-success text-white">owner</h7>{% endif %}</strong>
         </div>
     <br>
     {% endfor %}

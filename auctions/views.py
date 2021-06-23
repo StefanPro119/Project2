@@ -8,7 +8,7 @@ from .forms import MakeBid, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .models import User, Auction, Bid, Comment, Watchlist
+from .models import User, Auction, Bid, Comment, Watchlist, Category
 
 
 def index(request):
@@ -146,14 +146,19 @@ def add_comment(request, item_id):
             return render(request, "auctions/item.html", {
                 'form': form,
             })
-
-
     return render(request, "auctions/item.html", {
         'formm': CommentForm(),
         'formmm': Comment(),
         'item': item,
-        'comments': comments,
         })
+
+
+@login_required
+def categories(request):
+    categories = Category.objects.all()
+    return render(request, "auctions/category.html", {
+        'categories': categories,
+    })
 
 
 def login_view(request):
