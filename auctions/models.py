@@ -47,6 +47,10 @@ class Comment(models.Model):
     commment_auctions = models.ForeignKey(Auction, blank=True, null=True, on_delete=models.CASCADE, related_name='auctions_comment')
     date = models.DateTimeField(auto_now=True)
 
+#How to order comments by date
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return f"{self.commments}"
 

@@ -118,6 +118,8 @@
         <div>
             <h6>Comment: {{ comment }} </h6>
             <strong><h7>User: {{ comment.comment_user }} </h7>{% if comment.comment_user.id == item.seller.id %} <h7 class="p-1 mb-1 bg-success text-white">owner</h7>{% endif %}</strong>
+            <br>
+            <h7>Date: {{ comment.date }} </h7>
         </div>
     <br>
     {% endfor %}

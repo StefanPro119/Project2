@@ -44,9 +44,6 @@ def create(request):
 def auction_item(request, item_id):
     user_id = request.user
     item = Auction.objects.get(id=item_id)
-    # a = Category.objects.filter(id=item_id)
-    # z = Auction.objects.filter(select_category=a)
-    # w = Category.objects.get(id=item_id)
     comments = Comment.objects.filter(commment_auctions=item)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
@@ -72,9 +69,6 @@ def auction_item(request, item_id):
         'buyer': buyer,
         'comment_form': comment_form,
         'comments': comments,
-        # 'a': a,
-        # 'z':z,
-        # 'w': w
     })
 
 @login_required

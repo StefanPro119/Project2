@@ -33,7 +33,10 @@ class MakeBid(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = models.Comment
+        ordering = ['-date']
         fields = ['commments']
+
+
 
         #it will hide label 'commments'
         labels = {
