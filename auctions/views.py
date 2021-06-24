@@ -26,6 +26,7 @@ def index(request):
     })
 
 def create(request):
+    count = Watchlist.objects.filter(user_id=request.user).count()
     if request.method == 'POST':
         form = forms.CreateAuction(request.POST, request.FILES)
         if form.is_valid():
@@ -37,11 +38,15 @@ def create(request):
         form = forms.CreateAuction()
     return render(request, "auctions/create.html", {
         'form': form,
+        'count': count
     })
 
 def auction_item(request, item_id):
     user_id = request.user
     item = Auction.objects.get(id=item_id)
+    # a = Category.objects.filter(id=item_id)
+    # z = Auction.objects.filter(select_category=a)
+    # w = Category.objects.get(id=item_id)
     comments = Comment.objects.filter(commment_auctions=item)
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
@@ -66,7 +71,10 @@ def auction_item(request, item_id):
         'start_bid': start_bid,
         'buyer': buyer,
         'comment_form': comment_form,
-        'comments': comments
+        'comments': comments,
+        # 'a': a,
+        # 'z':z,
+        # 'w': w
     })
 
 @login_required
@@ -155,9 +163,24 @@ def add_comment(request, item_id):
 
 @login_required
 def categories(request):
+    count = Watchlist.objects.filter(user_id=request.user).count()
     categories = Category.objects.all()
-    return render(request, "auctions/category.html", {
+    return render(request, "auctions/categories.html", {
         'categories': categories,
+        'count': count
+    })
+
+@login_required
+def category(request, id):
+    count = Watchlist.objects.filter(user_id=request.user).count()
+    # to take Category id
+    categoryy = Category.objects.get(pk=id)
+    # to define that select_category from Auction is = to id from Category
+    select_category = Auction.objects.filter(select_category=categoryy)
+    return render(request, "auctions/category.html", {
+        'select_category': select_category,
+        'categoryy': categoryy,
+        'count': count
     })
 
 
