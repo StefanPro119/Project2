@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from . import forms
 from .forms import MakeBid, CommentForm
@@ -48,6 +48,10 @@ def auction_item(request, item_id):
     start_bid = Auction.objects.filter(id=item_id).first()
     form = MakeBid()
     comment_form = forms.CommentForm()
+    # using actual_bid_price for html page to say which price is acutal from which user
+    actual_bid_price = Bid.objects.filter(buyer=user_id, id=item_id)
+    # define auction_id=item (for that product (item) actually saying it is (auction_id) from class Watchlist) so after that we can use in html to define function for remove or add to wathclist, as 'if whatchlistt:"
+    watchlistt = Watchlist.objects.filter(user_id=user_id, auction_id=item)
     try:
         buyer = Bid.objects.filter(id=item_id).first().buyer
     except:
@@ -69,6 +73,9 @@ def auction_item(request, item_id):
         'buyer': buyer,
         'comment_form': comment_form,
         'comments': comments,
+        'watchlistt': watchlistt,
+        'bid': bid,
+        'actual_bid_price': actual_bid_price
     })
 
 @login_required
@@ -111,7 +118,7 @@ def make_bid(request, item_id):
         form = MakeBid(request.POST)
         if form.is_valid():
             bid_value = form.cleaned_data['bid_value']
-            if bid_value > start_bid.start_bit | bid:
+            if bid_value > start_bid.start_bit and bid_value > bid:
                 instance = form.save(commit=False)
                 instance.buyer = user_id
                 instance.id = item_id

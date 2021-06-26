@@ -33,7 +33,6 @@ class MakeBid(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = models.Comment
-        ordering = ['-date']
         fields = ['commments']
 
 

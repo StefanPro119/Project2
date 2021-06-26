@@ -13,13 +13,19 @@
                   </div>
             </div>
             <div class="card">
-                {% if list.auction_id.image %}
+                {% if cat.image %}
                     <img src="{{ cat.image.url }}" class="rounded" style="width: 17.4rem; height: 15rem">
                 {% else %}
                     <img src="{% static 'auctions/images/default.png' %}" class="rounded" style="width: 17.5rem; height: 15rem">
                 {% endif %}
             </div>
+            <h6>Starting bid:</h6><h2> €{{ cat.start_bit }}
+                {% if user.is_authenticated %}
+                    <div class="btn btn-outline-primary"  style="float: right;"><h6><a href="{% url 'item' cat.id %}">{{ item }}More info</a></h6></div> </h2>
+                {% endif %}
     </div>
+        {% empty %}
+            <h2>No items in this category!</h2>
         {% endfor %}
  </div>
 

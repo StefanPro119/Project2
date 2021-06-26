@@ -16,7 +16,6 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-#klasa za prodavanje proizvoda
 class Auction(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bidder')
     title = models.CharField(max_length=60)
@@ -31,7 +30,6 @@ class Auction(models.Model):
         return f"{self.seller} is selling {self.title}"
 
 
-#klasa za licitiranje proizvoda
 class Bid(models.Model):
     buyer = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='customer')
     bid_value = models.IntegerField(null=True)
@@ -40,7 +38,6 @@ class Bid(models.Model):
     def __str__(self):
         return f"{self.buyer} is offering {self.bid_value}"
 
-#klasa za komentarisanje proizvoda
 class Comment(models.Model):
     commments = models.TextField()
     comment_user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='user_comment')

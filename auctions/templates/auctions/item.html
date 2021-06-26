@@ -13,19 +13,11 @@
     {% endfor %}
 {% endif %}
 
-{{ x }}
-{{ arg }}
-{{ item.id }}
-<h1>{{ a }}</h1>
-<h1>{{ a.id }}</h1>
-{{ z }}
-
-
 
 <div style="display: flex; justify-content: center;">
     <h1>
         <div class="card-title text-dark bg-info mb-3"
-         style="max-width: 50rem; text-align: left;">Actual price: {{ item.start_bit }}€
+         style="max-width: 50rem; text-align: left;">Starting price: {{ item.start_bit }}€
         </div>
     </h1>
 </div>
@@ -66,10 +58,15 @@
         </div>
         {% if user.is_authenticated %}
         <div style="padding-top: 50px;">
-            <div style="padding-top: 20px;" >
-                <a href="{% url 'add_to_watchlist' item.id %}" type="button" class="btn btn-info">Add/remove to Watchlist</a>
+            <div style="padding-top: 20px;">
+                {% if watchlistt %}
+                    <a href="{% url 'add_to_watchlist' item.id %}" type="button" class="btn btn-danger">Remove from Watchlist</a>
+                {% else %}
+                    <a href="{% url 'add_to_watchlist' item.id %}" type="button" class="btn btn-success">Add to Watchlist</a>
+                {% endif %}
             </div>
         </div>
+        <br>
         {% endif %}
 {% if user.is_authenticated and item.seller.id != request.user.id and item.status == 'active' %}
     <div style="padding-top: 50px; ">
@@ -84,6 +81,13 @@
         {% if item.status == 'active' %}
             <div class="p-3 mb-2 bg-success text-white" style="float: left; width: 55%;">
                 <h4>Current bid is {{ bid_number }}€</h4>
+                {% if item.seller.id != request.user.id %}
+                    {% if actual_bid_price %}
+                        <h5 class="btn btn-success">Your bid is actual</h5>
+                    {% else %}
+                        <h5 class="btn btn-warning">You didn't bid or your bid is smaller than actual bid</h5>
+                    {% endif %}
+                {% endif %}
             </div>
         {% elif buyer == request.user %}
             <h3 class="text-success">It has been sold to you!</h3>
@@ -92,7 +96,7 @@
         {% endif %}
 
 <!--        if the user is sign in and if the user who creates item can see this button-->
-        {% if user.is_authenticated and item.seller.id == request.user.id %}
+        {% if user.is_authenticated and item.seller.id == request.user.id and item.status != 'sold' %}
             <div style="padding-top: 50px;">
                 <div style="padding-top: 20px;" >
                     <a href="{% url 'close_bid' item.id %}" type="button" class="btn btn-info">Close bid</a>
