@@ -15,7 +15,9 @@ colorama==0.4.4
 decorator==4.4.2
 defusedxml==0.6.0
 distlib==0.3.1
+dj-database-url==0.5.0
 Django==3.1.5
+django-heroku==0.3.1
 django-markdown==0.8.4
 django-resized==0.3.11
 dnspython==2.1.0
@@ -29,6 +31,7 @@ Flask-Mail==0.9.1
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==0.14.3
 greenlet==1.0.0
+gunicorn==20.1.0
 idna==2.10
 ipykernel==5.3.4
 ipython==7.19.0
@@ -60,11 +63,13 @@ pickleshare==0.7.5
 Pillow==8.2.0
 prometheus-client==0.8.0
 prompt-toolkit==3.0.8
+psycopg2==2.9.1
 pycparser==2.20
 Pygments==2.7.2
 pyparsing==2.4.7
 pyrsistent==0.17.3
 python-dateutil==2.8.1
+python-decouple==3.4
 pytz==2020.5
 pywin32==228
 pywinpty==0.5.7
@@ -85,5 +90,7 @@ virtualenv==20.2.1
 wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==1.0.1
+whitenoise==5.3.0
 widgetsnbextension==3.5.1
 WTForms==2.3.3
+
