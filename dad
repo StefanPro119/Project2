@@ -1,0 +1,167 @@
+[33mcommit 321e6ae7b4ec5565abc67dfd34bd0bc3cb5f2a0c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Sep 9 12:21:12 2021 +0200
+
+    first page
+
+[33mcommit 8bcb0897f8789e93c79efb196e934edc864b52e0[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 19:12:25 2021 +0200
+
+    heroku
+
+[33mcommit 81224e5463ac776709f2c3c1b2843b7abc78bb67[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 19:07:37 2021 +0200
+
+    heroku
+
+[33mcommit 464b9b18c627afebd2b831272834492c91527abb[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 19:05:15 2021 +0200
+
+    heroku
+
+[33mcommit 22d70b723246f4eaed67e347ce0c43d9fef16ca4[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 18:02:19 2021 +0200
+
+    heroku
+
+[33mcommit 0abc9e5516623a553999a1b18452ce4d93cdab0d[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 17:47:59 2021 +0200
+
+    heroku
+
+[33mcommit dc02db67b5e2f231d7eafe96f4e61e9012c65fc3[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 14:59:31 2021 +0200
+
+    heroku run
+
+[33mcommit dbbfeaf004091f31dffdb501e76d48f2abb1cab4[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 14:45:46 2021 +0200
+
+    pushing project to heroku
+
+[33mcommit bf4227d0badaaa893b7c6e6150c035201af00ffd[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Aug 26 14:30:45 2021 +0200
+
+    tweaked app to heroku
+
+[33mcommit 98d3b2fc454f521543ca2bce7de66eecfcc9bace[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Sun Jun 27 12:10:17 2021 +0200
+
+    creating requirements.txt file
+
+[33mcommit cc029d49f493e717b92990b75a353c9e2e0d0db9[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Sat Jun 26 14:05:12 2021 +0200
+
+    final touch
+
+[33mcommit 1b106a340708c7dd15818e2476d53a6ed82dc891[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Jun 24 15:00:59 2021 +0200
+
+    order comments by date
+
+[33mcommit 95f2510dba9d9c537d9d5026bf24e439ecbececc[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Jun 24 12:52:36 2021 +0200
+
+    creating single page for each category
+
+[33mcommit 947f523a569b35123bc2fee76ee1e9381c64d25f[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Wed Jun 23 14:19:38 2021 +0200
+
+    create categories page
+
+[33mcommit df9692ef8e86198d6c9818f4cc5d06be3c29879a[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue Jun 22 12:13:38 2021 +0200
+
+    creating comments form
+
+[33mcommit db01ee317c20bf6cf3535806cd2a5ac87dff8154[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Jun 17 13:00:54 2021 +0200
+
+    creating info messages for sold item
+
+[33mcommit 61d21c746c1c854cab16c38aa2e92aa19f8605b4[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu Jun 17 09:33:00 2021 +0200
+
+    Creating status field and close_bid function
+
+[33mcommit 1e0f063f41610262ec9eed69b4a6ecec8b7079ec[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue Jun 8 09:58:36 2021 +0200
+
+    if user bid less then last bid, the error message will pop out
+
+[33mcommit bcc2d4e976c5567e3cde1a527cd56ebd9361b1a1[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue Jun 8 09:26:08 2021 +0200
+
+    make a bid
+
+[33mcommit b6db2488db771df5fa5c503919e554538274fa1d[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue Jun 1 16:28:15 2021 +0200
+
+    displaying number of products from Watchlist
+
+[33mcommit 79ce89f2e230206471b77f488170e3a7ad9bc70b[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue Jun 1 13:34:01 2021 +0200
+
+    creating Watchlist
+
+[33mcommit 9cddb622761058b028f9ef46fbd19547ec685739[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Fri May 21 11:12:41 2021 +0200
+
+    creating html and css style for home page and for each item
+
+[33mcommit a3b99794e4f95c1b0637f6817867e71c1a4050d6[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Wed May 19 10:16:49 2021 +0200
+
+    Creating pictures for products
+
+[33mcommit f32b405b0fc3bc7d4166eddae5fe240b17ec25b9[m[33m ([m[1;31morigin/category[m[33m, [m[1;32mcategory[m[33m)[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Tue May 18 09:33:09 2021 +0200
+
+    creating category class'
+
+[33mcommit 2c7dbc8e5670e4f2eee45bdc702cbb519e72a4c3[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Mon May 17 20:21:48 2021 +0200
+
+    Inserting widgets
+
+[33mcommit f7dfb5fc67781d98b6916f33f50b4573379f8f2d[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Fri May 14 16:46:39 2021 +0200
+
+    creating def create with create.html page
+
+[33mcommit 8d106663892c9e2c49d08e095da017298637a25e[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Thu May 13 10:20:28 2021 +0200
+
+    creating models
+
+[33mcommit 5e33a1d69868a2c6069188c6e1ce0a714a1058f6[m
+Author: StefanPro119 <74908361+StefanPro119@users.noreply.github.com>
+Date:   Mon May 10 10:20:28 2021 +0200
+
+    First Commit
