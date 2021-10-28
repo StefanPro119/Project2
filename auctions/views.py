@@ -25,6 +25,9 @@ def index(request):
         'lists': lists,
     })
 
+
+
+
 def create(request):
     count = Watchlist.objects.filter(user_id=request.user).count()
     if request.method == 'POST':
